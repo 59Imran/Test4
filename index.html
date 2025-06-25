@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winter Holidays - ABC Kashmir</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter & Playfair Display for headings-->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        html, body {
+            width: 100%; /* Ensures HTML and body are constrained to 100% width */
+            max-width: 100vw; /* Explicitly limits width to viewport width to prevent overflow */
+            overflow-x: hidden; /* Prevents horizontal scrolling artifacts */
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8; /* Light background for the overall page */
+            color: #333;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(5px);
+        }
+        nav {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Ensure it takes full viewport height */
+            background-color: rgba(255, 255, 255, 0.98);
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Start content from the top */
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            padding: 2rem; /* Add overall padding to the overlay */
+            padding-top: 5rem; /* Push content down to avoid overlap with header/close button */
+            overflow-y: auto; /* Enable scrolling within the menu if content overflows */
+        }
+        .mobile-menu-overlay.is-active {
+            transform: translateX(0);
+        }
+        .mobile-menu-overlay a {
+            padding: 1.25rem 1rem; /* Increased vertical and added horizontal padding */
+            font-size: 1.75rem; /* Slightly larger font size */
+            color: #1F2937; /* Darker black for better contrast */
+            font-weight: 500; /* Slightly bolder */
+            transition: color 0.2s, background-color 0.2s;
+            width: 100%; /* Ensure full width for tap target */
+            text-align: center; /* Center text within the wide link */
+            border-radius: 0.5rem; /* Rounded corners for each menu item */
+            margin-bottom: 0.75rem; /* Add margin between menu items */
+        }
+        .mobile-menu-overlay a:last-child {
+            margin-bottom: 0; /* No margin after the last item */
+        }
+        .mobile-menu-overlay a:hover,
+        .mobile-menu-overlay a:focus { /* Added focus for accessibility */
+            color: #ffffff; /* White text on hover */
+            background-color: #4a90e2; /* A shade of blue for hover background */
+        }
+
+        /* Hero Section Styling */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            flex-direction: column;
+            padding: 2rem;
+            overflow: hidden;
+            transition: background-image 2.5s ease-in-out; /* Slowed down image transition */
+        }
+
+        .hero-content {
+            max-width: 90%;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7); /* Keep text shadow for readability */
+        }
+
+        /* Animation for hero content text */
+        .hero-title, .hero-subtitle {
+            transition: opacity 1.5s ease-in-out; /* Slowed down text opacity transition */
+            opacity: 1; /* Default state */
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+
+        .fade-in {
+            opacity: 1;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            color: #e0f2fe;
+        }
+        .hero-subtitle {
+            font-size: 1.75rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            color: #d1fae5;
+        }
+
+        .hero-button {
+            padding: 1rem 2.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #4a90e2 0%, #8e44ad 100%);
+            color: white;
+            border-radius: 50px;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        .hero-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #8e44ad 0%, #4a90e2 100%);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2.5rem;
+            animation: bounce 2s infinite;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-15px) translateX(-50%); }
+            60% { transform: translateY(-7px) translateX(-50%); }
+        }
+
+
+        /* Global Carousel Styling for horizontal continuous scroll (for destinations) */
+        .carousel-outer-wrapper {
+            width: 100%;
+            overflow: hidden; /* Hide overflow from scrolling content */
+            position: relative;
+            padding-bottom: 1rem; /* Space for shadows below cards */
+        }
+
+        .carousel-inner-wrapper {
+            display: flex; /* Arrange items horizontally */
+            width: fit-content; /* Allow content to dictate width */
+            white-space: nowrap; /* Prevent items from wrapping */
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            padding: 1rem 0; /* Vertical padding within wrapper */
+        }
+
+        /* Packages carousel should NOT move */
+        #packages-carousel .carousel-inner-wrapper {
+            animation: none; /* REMOVED ANIMATION */
+            display: grid; /* Use grid for static display */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 2.5rem; /* Matches margin-right from original carousel-item */
+            white-space: normal; /* Allow items to wrap */
+            justify-content: center; /* Center items in grid */
+            width: 100%; /* Take full width of parent */
+        }
+        /* Adjust carousel-item for static packages grid */
+        #packages-carousel .carousel-item {
+            width: auto; /* Let grid determine width */
+            margin-right: 0; /* Remove specific margin for grid gap to work */
+        }
+
+        .carousel-item {
+            flex-shrink: 0; /* Prevent items from shrinking */
+            width: 320px; /* Increased fixed width for items for better presentation */
+            margin-right: 2.5rem; /* Equivalent to gap-10, adjust if needed */
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* deeper shadow */
+            overflow: hidden;
+            transform: scale(1);
+            transition: transform 0.3s ease-in-out;
+            border: 1px solid rgba(224, 224, 224, 0.7); /* Subtle transparent border */
+            cursor: pointer; /* Indicate clickable for the card itself */
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.03); /* Slightly less dramatic scale on hover */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Specific animations for destinations carousel */
+        @keyframes scrollContent {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); /* Scroll half the duplicated content */ }
+        }
+
+        #destination-carousel .carousel-inner-wrapper {
+            animation-name: scrollContent;
+            animation-duration: 40s; /* Adjust speed for destinations */
+        }
+
+
+        /* Adjustments for smaller screens for general carousel-item (destinations) */
+        @media (max-width: 1023px) { /* md breakpoint and below */
+            .carousel-item:not(#packages-carousel .carousel-item) {
+                width: 300px; /* Slightly smaller fixed width */
+                margin-right: 1.5rem; /* Reduced margin for tighter fit */
+            }
+        }
+        @media (max-width: 767px) { /* sm breakpoint and below */
+            .carousel-item:not(#packages-carousel .carousel-item) {
+                /* Calculate width based on viewport, accounting for container's px-4 AND internal spacing */
+                width: calc(100vw - 4rem); /* Ensure item fits screen minus 2rem container padding and 2rem internal margin */
+                margin-right: 2rem; /* Consistent space between items on mobile */
+            }
+            #destination-carousel .carousel-inner-wrapper {
+                /* Add initial and final padding for the scrollable content on mobile */
+                padding-left: 1rem; /* Start the first item after 1rem padding */
+                padding-right: 1rem; /* Ensure space at the end of the scroll */
+            }
+        }
+
+        /* Hotel Carousel Specifics */
+        .hotel-image-carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .hotel-image-carousel-wrapper {
+            display: flex;
+            animation: slideHotelImages 10s linear infinite; /* Adjusted to 10s for faster movement */
+        }
+
+        .hotel-image-carousel-wrapper img {
+            width: 100%; /* Each image takes full width of its container */
+            height: 400px; /* Fixed height for hotel images, adjust as needed */
+            object-fit: cover;
+            flex-shrink: 0;
+            display: block; /* Ensure images behave as block elements for flex */
+        }
+
+        @keyframes slideHotelImages {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Scrolls half the wrapper width (one set of duplicated images) */
+        }
+
+        /* Section Specific Styling */
+        section {
+            padding: 4rem 0; /* Default vertical padding for sections */
+        }
+        section h2 {
+            font-size: 3.5rem; /* Larger headings for sections */
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #2c3e50; /* Darker blue-gray */
+        }
+        .text-section-description {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100; /* Above everything */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 1rem; /* rounded-xl */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            max-width: 600px; /* Max width for readability */
+            width: 90%;
+            position: relative;
+            transform: translateY(-50px) scale(0.9);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0;
+            max-height: 90vh; /* Limit height */
+            overflow-y: auto; /* Enable scrolling if content overflows */
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .modal-close-button:hover {
+            color: #e74c3c; /* Reddish on hover */
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="#home" class="text-3xl font-bold text-gray-800 rounded-lg p-2 hover:bg-gray-100 transition duration-300">
+                ABC <span class="text-blue-600">Kashmir</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-lg text-gray-700 hover:text-blue-600 transition duration-300 font-medium">Home</a>
+                <a href="#destination" class="text-lg text-gray-700 hover:text-blue-600 transition duration-300 font-medium">Destinations</a>
+                <a href="#packages" class="text-lg text-gray-700 hover:text-blue-600 transition duration-300 font-medium">Packages</a>
+                <a href="#hotel" class="text-lg text-gray-700 hover:text-blue-600 transition duration-300 font-medium">Our Hotel</a>
+                <a href="#services" class="text-lg text-gray-700 hover:text-blue-600 transition duration-300 font-medium">Services</a>
+                <a href="#contact" class="text-lg text-gray-700 hover:text-blue-600 transition duration-300 font-medium">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray-700 text-3xl focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="mobile-menu-overlay md:hidden">
+            <a href="#home" class="block py-3 text-gray-700 hover:text-blue-600 text-xl" onclick="toggleMobileMenu()">Home</a>
+            <a href="#destination" class="block py-3 text-gray-700 hover:text-blue-600 text-xl" onclick="toggleMobileMenu()">Destinations</a>
+            <a href="#packages" class="block py-3 text-gray-700 hover:text-blue-600 text-xl" onclick="toggleMobileMenu()">Packages</a>
+            <a href="#hotel" class="block py-3 text-gray-700 hover:text-blue-600 text-xl" onclick="toggleMobileMenu()">Our Hotel</a>
+            <a href="#services" class="block py-3 text-gray-700 hover:text-blue-600 text-xl" onclick="toggleMobileMenu()">Services</a>
+            <a href="#contact" class="block py-3 text-gray-700 hover:text-blue-600 text-xl" onclick="toggleMobileMenu()">Contact</a>
+            <button class="absolute top-6 right-6 text-gray-700 text-4xl focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section (Hero) -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title"></h1>
+                <p class="hero-subtitle"></p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+                    <a href="#destination" class="hero-button">
+                        Explore Now
+                    </a>
+                </div>
+            </div>
+            <a href="#destination" class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </section>
+
+        <!-- Destination Section - Continuous Horizontal Scroll -->
+        <section id="destination" class="bg-white py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-center">Explore Our Destinations</h2>
+                <p class="text-center text-xl text-section-description max-w-3xl mx-auto">Discover the most enchanting places for your perfect winter escape, each offering unique experiences and breathtaking views.</p>
+                <div id="destination-carousel" class="carousel-outer-wrapper mt-10">
+                    <div class="carousel-inner-wrapper">
+                        <!-- Destination Cards with Data Attributes for Modal -->
+                        <div class="carousel-item"
+                             data-title="Srinagar"
+                             data-description="Srinagar, the serene summer capital, is famous for its picturesque Dal Lake. Enjoy relaxing houseboat stays and explore the vibrant Mughal Gardens."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Srinagar">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Srinagar" alt="Srinagar Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Srinagar</h3>
+                                <p class="text-gray-600 text-sm mb-4">Srinagar, the serene summer capital, is famous for its picturesque Dal Lake. Enjoy relaxing houseboat stays and explore the vibrant Mughal Gardens.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Gulmarg"
+                             data-description="Gulmarg, the Meadow of Flowers, offers pristine ski slopes and the world's highest gondola. It's a paradise for adventure seekers and nature lovers alike."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Gulmarg">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Gulmarg" alt="Gulmarg Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Gulmarg</h3>
+                                <p class="text-gray-600 text-sm mb-4">Gulmarg, the Meadow of Flowers, offers pristine ski slopes and the world's highest gondola. It's a paradise for adventure seekers and nature lovers alike.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Pahalgam"
+                             data-description="Pahalgam, the Valley of Shepherds, is renowned for its breathtaking valleys like Betaab and Aru. It's an ideal destination for serene nature walks and invigorating treks."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Pahalgam">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Pahalgam" alt="Pahalgam Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Pahalgam</h3>
+                                <p class="text-gray-600 text-sm mb-4">Pahalgam, the Valley of Shepherds, is renowned for its breathtaking valleys like Betaab and Aru. It's an ideal destination for serene nature walks and invigorating treks.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Sonamarg"
+                             data-description="Sonamarg, the Meadow of Gold, serves as a stunning gateway to Ladakh. Discover the majestic Thajiwas Glacier and enjoy the picturesque alpine scenery."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Sonamarg">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Sonamarg" alt="Sonamarg Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Sonamarg</h3>
+                                <p class="text-gray-600 text-sm mb-4">Sonamarg, the Meadow of Gold, serves as a stunning gateway to Ladakh. Discover the majestic Thajiwas Glacier and enjoy the picturesque alpine scenery.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Yusmarg"
+                             data-description="Yusmarg, known as the Meadow of Jesus, is an unspoiled destination with serene landscapes. It's perfect for peaceful retreats, leisurely walks, and enjoyable horse riding experiences."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Yusmarg">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Yusmarg" alt="Yusmarg Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Yusmarg</h3>
+                                <p class="text-gray-600 text-sm mb-4">Yusmarg, known as the Meadow of Jesus, is an unspoiled destination with serene landscapes. It's perfect for peaceful retreats, leisurely walks, and enjoyable horse riding experiences.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Doodhpathri"
+                             data-description="Doodhpathri, the Valley of Milk, is a stunning saucer-shaped valley. It boasts lush green meadows and a beautiful meandering river, offering a tranquil escape."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Doodhpathri">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Doodhpathri" alt="Doodhpathri Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Doodhpathri</h3>
+                                <p class="text-gray-600 text-sm mb-4">Doodhpathri, the Valley of Milk, is a stunning saucer-shaped valley. It boasts lush green meadows and a beautiful meandering river, offering a tranquil escape.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Duplicates for continuous loop -->
+                        <div class="carousel-item"
+                             data-title="Srinagar"
+                             data-description="Srinagar, the serene summer capital, is famous for its picturesque Dal Lake. Enjoy relaxing houseboat stays and explore the vibrant Mughal Gardens."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Srinagar">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Srinagar" alt="Srinagar Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Srinagar</h3>
+                                <p class="text-gray-600 text-sm mb-4">Srinagar, the serene summer capital, is famous for its picturesque Dal Lake. Enjoy relaxing houseboat stays and explore the vibrant Mughal Gardens.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Gulmarg"
+                             data-description="Gulmarg, the Meadow of Flowers, offers pristine ski slopes and the world's highest gondola. It's a paradise for adventure seekers and nature lovers alike."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Gulmarg">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Gulmarg" alt="Gulmarg Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Gulmarg</h3>
+                                <p class="text-gray-600 text-sm mb-4">Gulmarg, the Meadow of Flowers, offers pristine ski slopes and the world's highest gondola. It's a paradise for adventure seekers and nature lovers alike.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Pahalgam"
+                             data-description="Pahalgam, the Valley of Shepherds, is renowned for its breathtaking valleys like Betaab and Aru. It's an ideal destination for serene nature walks and invigorating treks."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Pahalgam">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Pahalgam" alt="Pahalgam Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Pahalgam</h3>
+                                <p class="text-gray-600 text-sm mb-4">Pahalgam, the Valley of Shepherds, is renowned for its breathtaking valleys like Betaab and Aru. It's an ideal destination for serene nature walks and invigorating treks.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Sonamarg"
+                             data-description="Sonamarg, the Meadow of Gold, serves as a stunning gateway to Ladakh. Discover the majestic Thajiwas Glacier and enjoy the picturesque alpine scenery."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Sonamarg">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Sonamarg" alt="Sonamarg Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Sonamarg</h3>
+                                <p class="text-gray-600 text-sm mb-4">Sonamarg, the Meadow of Gold, serves as a stunning gateway to Ladakh. Discover the majestic Thajiwas Glacier and enjoy the picturesque alpine scenery.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Yusmarg"
+                             data-description="Yusmarg, known as the Meadow of Jesus, is an unspoiled destination with serene landscapes. It's perfect for peaceful retreats, leisurely walks, and enjoyable horse riding experiences."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Yusmarg">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Yusmarg" alt="Yusmarg Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Yusmarg</h3>
+                                <p class="text-gray-600 text-sm mb-4">Yusmarg, known as the Meadow of Jesus, is an unspoiled destination with serene landscapes. It's perfect for peaceful retreats, leisurely walks, and enjoyable horse riding experiences.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item"
+                             data-title="Doodhpathri"
+                             data-description="Doodhpathri, the Valley of Milk, is a stunning saucer-shaped valley. It boasts lush green meadows and a beautiful meandering river, offering a tranquil escape."
+                             data-image="https://placehold.co/320x220/e0e7ff/333333?text=Doodhpathri">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Doodhpathri" alt="Doodhpathri Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Doodhpathri</h3>
+                                <p class="text-gray-600 text-sm mb-4">Doodhpathri, the Valley of Milk, is a stunning saucer-shaped valley. It boasts lush green meadows and a beautiful meandering river, offering a tranquil escape.</p>
+                                <button onclick="scrollToSection('packages', event)" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-300 ease-in-out">
+                                    View Packages
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Packages Section - Now static (no horizontal scroll) -->
+        <section id="packages" class="bg-gray-100 py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-center">Our Special Packages</h2>
+                <p class="text-center text-xl text-section-description max-w-3xl mx-auto">Explore our curated packages designed to offer you the best of Kashmir, from adventurous treks to luxurious getaways.</p>
+                <div id="packages-carousel" class="carousel-outer-wrapper mt-10">
+                    <div class="carousel-inner-wrapper">
+                        <!-- Placeholder package cards (no longer duplicated for looping) -->
+                        <div class="carousel-item">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Package+1" alt="Package 1 Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Deluxe Winter Escape</h3>
+                                <p class="text-gray-600 text-sm mb-4">Experience luxury in snow-covered landscapes with premium services.</p>
+                                <ul class="text-gray-700 text-xs mb-4 space-y-1 text-left mx-auto max-w-max">
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>5 Nights Stay</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Private Transfer</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Skiing Included</li>
+                                </ul>
+                                <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out text-center block">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Package+2" alt="Package 2 Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Adventure Trek Package</h3>
+                                <p class="text-gray-600 text-sm mb-4">Thrilling treks to alpine lakes and hidden valleys, guided tours.</p>
+                                <ul class="text-gray-700 text-xs mb-4 space-y-1 text-left mx-auto max-w-max">
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>7 Days Trek</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Expert Guides</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Camping Gear</li>
+                                </ul>
+                                <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out text-center block">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Package+3" alt="Package 3 Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Family Fun Vacation</h3>
+                                <p class="text-gray-600 text-sm mb-4">A perfect family getaway with activities for all ages.</p>
+                                <ul class="text-gray-700 text-xs mb-4 space-y-1 text-left mx-auto max-w-max">
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Child-Friendly</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Sightseeing</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Special Meals</li>
+                                </ul>
+                                <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out text-center block">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://placehold.co/320x220/e0e7ff/333333?text=Package+4" alt="Package 4 Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Cultural Immersion</h3>
+                                <p class="text-gray-600 text-sm mb-4">Explore local traditions, cuisine, and heritage sites.</p>
+                                <ul class="text-gray-700 text-xs mb-4 space-y-1 text-left mx-auto max-w-max">
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Local Tours</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Cooking Class</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Handicraft Visit</li>
+                                </ul>
+                                <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out text-center block">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+                        <!-- New Package Card 5 -->
+                        <div class="carousel-item">
+                            <img src="https://placehold.co/320x220/a7d9b9/333333?text=Package+5" alt="Package 5 Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Snow Adventure Retreat</h3>
+                                <p class="text-gray-600 text-sm mb-4">A thrilling trip designed for snow sports enthusiasts. Enjoy activities like snowshoeing and snowboarding.</p>
+                                <ul class="text-gray-700 text-xs mb-4 space-y-1 text-left mx-auto max-w-max">
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Ski Resort Access</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Equipment Rental</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Cozy Cabin Stays</li>
+                                </ul>
+                                <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out text-center block">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+                        <!-- New Package Card 6 -->
+                        <div class="carousel-item">
+                            <img src="https://placehold.co/320x220/c2b8c9/333333?text=Package+6" alt="Package 6 Placeholder" class="w-full h-56 object-cover rounded-t-xl">
+                            <div class="p-6 text-center">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Romantic Winter Getaway</h3>
+                                <p class="text-gray-600 text-sm mb-4">Perfect for couples seeking a serene and romantic escape amidst snowy landscapes. Enjoy intimate experiences.</p>
+                                <ul class="text-gray-700 text-xs mb-4 space-y-1 text-left mx-auto max-w-max">
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Romantic Dinners</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Private Tours</li>
+                                    <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Fireplace Suites</li>
+                                </ul>
+                                <a href="#contact" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out text-center block">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Hotel Section -->
+        <section id="hotel" class="bg-white py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-center">Our Exclusive Hotel: The ABC Inn</h2>
+                <p class="text-center text-xl text-section-description max-w-3xl mx-auto">Experience unparalleled comfort and luxury in our hand-picked accommodations, designed to be your perfect home away from home.</p>
+                <div class="flex flex-col lg:flex-row items-start gap-10 bg-blue-50 rounded-xl shadow-lg p-8 mt-10 animate-slide-in-section">
+                    <div class="lg:w-1/2 overflow-hidden rounded-lg shadow-xl hotel-image-carousel-container">
+                        <div class="hotel-image-carousel-wrapper">
+                            <!-- Placeholder images for hotel carousel -->
+                            <img src="https://placehold.co/800x400/add8e6/333333?text=Hotel+Exterior" alt="Hotel Exterior Placeholder">
+                            <img src="https://placehold.co/800x400/98fb98/333333?text=Hotel+Lobby" alt="Hotel Lobby Placeholder">
+                            <img src="https://placehold.co/800x400/dda0dd/333333?text=Hotel+Room" alt="Hotel Room Placeholder">
+                            <img src="https://placehold.co/800x400/ffb6c1/333333?text=Hotel+Dining" alt="Hotel Dining Placeholder">
+                            <img src="https://placehold.co/800x400/f0e68c/333333?text=Hotel+View" alt="Hotel View Placeholder">
+                            <!-- Duplicate images for seamless loop -->
+                            <img src="https://placehold.co/800x400/add8e6/333333?text=Hotel+Exterior" alt="Hotel Exterior Placeholder Duplicate">
+                            <img src="https://placehold.co/800x400/98fb98/333333?text=Hotel+Lobby" alt="Hotel Lobby Placeholder Duplicate">
+                            <img src="https://placehold.co/800x400/dda0dd/333333?text=Hotel+Room" alt="Hotel Room Placeholder Duplicate">
+                            <img src="https://placehold.co/800x400/ffb6c1/333333?text=Hotel+Dining" alt="Hotel Dining Placeholder Duplicate">
+                            <img src="https://placehold.co/800x400/f0e68c/333333?text=Hotel+View" alt="Hotel View Placeholder Duplicate">
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 text-center lg:text-left">
+                        <h3 class="text-3xl font-semibold text-indigo-800 mb-4">Experience Unmatched Comfort</h3>
+                        <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+                            Discover a comfortable and inviting stay at our exclusive hotel. We provide exceptional amenities and service to make your visit memorable.
+                        </p>
+                        <ul class="text-gray-700 text-lg space-y-2 mb-8 text-center lg:text-left">
+                            <li class="flex items-center justify-center lg:justify-start">
+                                <i class="fas fa-star text-yellow-500 mr-3"></i>Quality Accommodations
+                            </li>
+                            <li class="flex items-center justify-center lg:justify-start">
+                                <i class="fas fa-wifi text-blue-500 mr-3"></i>Wi-Fi Available
+                            </li>
+                            <li class="flex items-center justify-center lg:justify-start">
+                                <i class="fas fa-utensils text-orange-500 mr-3"></i>On-site Dining Options
+                            </li>
+                        </ul>
+                        <a href="#contact" class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                            Inquire About Stays
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Services Section - Slide-in on scroll -->
+        <section id="services" class="bg-gradient-to-br from-blue-50 to-indigo-50 py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-center">Our Comprehensive Services</h2>
+                <p class="text-center text-xl text-section-description max-w-3xl mx-auto">
+                    We offer a range of services to ensure every aspect of your trip is seamless and enjoyable, from planning to execution.
+                </p>
+                <div id="services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10 animate-slide-in-section">
+                    <!-- Service Card 1: Flight Tickets -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 group">
+                        <div class="p-6 text-center">
+                            <i class="fas fa-plane-departure text-6xl text-blue-600 mb-4"></i>
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-3">Flight Tickets</h3>
+                            <p class="text-gray-600 mb-6">We assist with booking flights for your convenience, ensuring the best prices.</p>
+                            <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out">
+                                Inquire
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Service Card 2: Stay in Kashmir -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 group">
+                        <div class="p-6 text-center">
+                            <i class="fas fa-hotel text-6xl text-purple-600 mb-4"></i>
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-3">Comfortable Stay</h3>
+                            <p class="text-gray-600 mb-6">Arrangements for comfortable accommodations tailored to your preferences.</p>
+                            <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out">
+                                Inquire
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Service Card 3: Travel in Kashmir -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 group">
+                        <div class="p-6 text-center">
+                            <i class="fas fa-car-alt text-6xl text-teal-600 mb-4"></i>
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-3">Local Travel</h3>
+                            <p class="text-gray-600 mb-6">Seamless local transportation services to explore every corner.</p>
+                            <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-300 ease-in-out">
+                                Inquire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-gray-800 text-white py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-center text-white">Get In Touch</h2>
+                <p class="text-center text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    We're here to help plan your perfect winter holiday. Reach out to us through our contact details or connect on social media.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <!-- Contact Info Card -->
+                    <div class="bg-gray-700 p-10 rounded-2xl shadow-xl flex flex-col justify-center h-full text-center transform hover:scale-105 transition duration-300 ease-in-out border border-gray-600">
+                        <h3 class="text-3xl font-bold mb-8 text-blue-300">Contact Details</h3>
+                        <div class="space-y-6 text-lg">
+                            <p class="flex items-center justify-center font-medium">
+                                <i class="fas fa-map-marker-alt mr-4 text-blue-400 text-2xl"></i>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Your+Travel+Office+Address" target="_blank" class="hover:underline text-gray-200">
+                                    123 Travel Lane, Adventure City, World
+                                </a>
+                            </p>
+                            <p class="text-xl flex items-center justify-center font-medium">
+                                <i class="fas fa-phone mr-4 text-blue-400 text-2xl"></i>
+                                <a href="tel:+1234567890" class="hover:underline text-gray-200">+1 (234) 567-890</a>
+                            </p>
+                            <p class="text-xl flex items-center justify-center font-medium">
+                                <i class="fas fa-envelope mr-4 text-blue-400 text-2xl"></i>
+                                <a href="mailto:info@abckashmir.com" class="hover:underline text-gray-200">info@abckashmir.com</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Section -->
+                    <div class="bg-gray-700 p-10 rounded-2xl shadow-xl flex flex-col justify-center h-full text-center transform hover:scale-105 transition duration-300 ease-in-out border border-gray-600">
+                        <h3 class="text-3xl font-bold mb-8 text-blue-300">Connect With Us</h3>
+                        <div class="flex flex-wrap gap-8 justify-center">
+                            <a href="https://wa.me/YOURPHONENUMBER" target="_blank" class="text-green-400 hover:text-green-300 transition duration-300 text-5xl transform hover:scale-110" aria-label="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="mailto:info@abckashmir.com" target="_blank" class="text-red-400 hover:text-red-300 transition duration-300 text-5xl transform hover:scale-110" aria-label="Gmail">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://www.instagram.com/YOURINSTAGRAM" target="_blank" class="text-pink-400 hover:text-pink-300 transition duration-300 text-5xl transform hover:scale-110" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.youtube.com/YOURYOUTUBE" target="_blank" class="text-red-500 hover:text-red-400 transition duration-300 text-5xl transform hover:scale-110" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://www.facebook.com/YOURFACEBOOK" target="_blank" class="text-blue-500 hover:text-blue-400 transition duration-300 text-5xl transform hover:scale-110" aria-label="Facebook">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Action Buttons Container -->
+    <div class="fixed bottom-6 right-6 flex flex-col space-y-4 z-50">
+        <!-- WhatsApp Floating Action Button -->
+        <a href="https://wa.me/+919797906958?text=Hello!%20I'm%20interested%20in%20your%20travel%20packages."
+           target="_blank"
+           class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110 flex items-center justify-center"
+           aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp text-3xl"></i>
+        </a>
+        <!-- Call Floating Action Button -->
+        <a href="tel:+919797906958"
+           class="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110 flex items-center justify-center"
+           aria-label="Call Us">
+            <i class="fas fa-phone text-3xl"></i>
+        </a>
+    </div>
+
+    <!-- Destination Detail Modal -->
+    <div id="destinationModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="closeModalBtn">&times;</button>
+            <img id="modalImage" src="" alt="Destination Image">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+
+    <!-- Home Discover More Modal (still present in HTML, but not triggered by a button anymore) -->
+    <div id="homeDiscoverModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="closeHomeDiscoverModalBtn">&times;</button>
+            <img src="https://placehold.co/600x300/ABCDEF/333333?text=Your+Winter+Dream" alt="Home Discover Image">
+            <h3 class="text-3xl font-bold mb-4 text-blue-800">Your Perfect Winter Getaway Awaits!</h3>
+            <p class="text-gray-700 text-lg mb-4">
+                Immerse yourself in the enchanting beauty of Kashmir's winter wonderland. From snow-capped peaks to serene frozen lakes, every moment here promises magic and adventure.
+            </p>
+            <p class="text-gray-700 text-lg">
+                We specialize in crafting bespoke experiences, ensuring your winter holiday is filled with unforgettable memories and seamless travel.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Company Info -->
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-4">ABC Kashmir</h3>
+                <p class="text-gray-400 leading-relaxed mb-4">
+                    Your trusted partner for unforgettable winter journeys in the breathtaking landscapes of Kashmir.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="https://www.facebook.com/YOURFACEBOOK" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300" aria-label="Facebook">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/YOURINSTAGRAM" target="_blank" class="text-pink-400 hover:text-pink-300 transition duration-300" aria-label="Instagram">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://twitter.com/YOURTWITTER" target="_blank" class="text-blue-300 hover:text-blue-200 transition duration-300" aria-label="Twitter">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/YOURYOUTUBE" target="_blank" class="text-red-500 hover:text-red-400 transition duration-300" aria-label="YouTube">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#home" class="hover:text-white transition duration-300">Home</a></li>
+                    <li><a href="#destination" class="hover:text-white transition duration-300">Destinations</a></li>
+                    <li><a href="#packages" class="hover:text-white transition duration-300">Packages</a></li>
+                    <li><a href="#hotel" class="hover:text-white transition duration-300">Our Hotel</a></li>
+                    <li><a href="#services" class="hover:text-white transition duration-300">Services</a></li>
+                    <li><a href="#contact" class="hover:text-white transition duration-300">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4">Contact Info</h3>
+                <ul class="space-y-2">
+                    <li><i class="fas fa-map-marker-alt mr-2 text-gray-500"></i>123 Travel Lane, Adventure City, World</li>
+                    <li><i class="fas fa-phone mr-2 text-gray-500"></i>+1 (234) 567-890</li>
+                    <li><i class="fas fa-envelope mr-2 text-gray-500"></i>info@abckashmir.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 mt-10 border-t border-gray-700 pt-6">
+            &copy; <span id="current-year"></span> ABC Kashmir. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('is-active'); // Toggles the 'is-active' class
+        }
+
+        // Function to scroll to a specific section
+        function scrollToSection(sectionId, event) {
+            if (event) {
+                event.stopPropagation(); // Stop event bubbling to the parent card
+            }
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Update current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // --- Home Section Background Image & Text Animation ---
+            const heroData = [
+                {
+                    image: 'https://placehold.co/1920x1080/6A83AB/FFFFFF/png?text=Snowy+Mountains+Kashmir',
+                    title: "Winter Holidays",
+                    subtitle: "Get Ready for an Unforgettable Journey"
+                },
+                {
+                    image: 'https://placehold.co/1920x1080/A0B9CC/333333/png?text=Frozen+Lake+View',
+                    title: "Serene Frozen Lakes",
+                    subtitle: "Discover Tranquility in Kashmir's Winter"
+                },
+                {
+                    image: 'https://placehold.co/1920x1080/C0D9E6/111111/png?text=Skiing+Adventure',
+                    title: "Adventure Awaits",
+                    subtitle: "Hit the Slopes and Embrace the Thrill"
+                },
+                {
+                    image: 'https://placehold.co/1920x1080/8DAABF/EEEEEE/png?text=Charming+Houseboats',
+                    title: "Cozy Houseboat Stays",
+                    subtitle: "Experience Unique Lakeside Comfort"
+                }
+            ];
+
+            const heroSection = document.getElementById('home');
+            const heroTitleElement = heroSection.querySelector(".hero-title");
+            const heroSubtitleElement = heroSection.querySelector(".hero-subtitle");
+            let currentHeroIndex = 0;
+
+            function updateHeroContent(index) {
+                const data = heroData[index];
+
+                // Fade out text first
+                heroTitleElement.classList.add('fade-out');
+                heroSubtitleElement.classList.add('fade-out');
+
+                // Update content after text fades out
+                setTimeout(() => {
+                    heroSection.style.backgroundImage = `url('${data.image}')`;
+                    heroTitleElement.textContent = data.title;
+                    heroSubtitleElement.textContent = data.subtitle;
+
+                    // Fade in text
+                    heroTitleElement.classList.remove('fade-out');
+                    heroSubtitleElement.classList.remove('fade-out');
+                    heroTitleElement.classList.add('fade-in');
+                    heroSubtitleElement.classList.add('fade-in');
+                }, 1500); // Wait for fade-out transition duration (increased from 1000ms)
+
+                // Remove fade-in class after it completes to reset for next cycle
+                setTimeout(() => {
+                    heroTitleElement.classList.remove('fade-in');
+                    heroSubtitleElement.classList.remove('fade-in');
+                }, 3000); // 1.5s for fade-out, 1.5s for fade-in = 3s total for text animation
+            }
+
+            // Initial load
+            updateHeroContent(currentHeroIndex);
+
+            // Cycle through content every 8 seconds (increased from 6000ms)
+            setInterval(() => {
+                currentHeroIndex = (currentHeroIndex + 1) % heroData.length;
+                updateHeroContent(currentHeroIndex);
+            }, 8000);
+
+
+            // --- Horizontal Carousel Duplication for seamless loop (Destination Carousel only) ---
+            function setupInfiniteCarousel(carouselId) {
+                const carouselOuter = document.getElementById(carouselId);
+                if (!carouselOuter) return;
+
+                const carouselInner = carouselOuter.querySelector('.carousel-inner-wrapper');
+                const carouselItems = carouselInner.querySelectorAll('.carousel-item');
+
+                // ONLY clone if the carousel needs to move (i.e., not the packages carousel)
+                // And only clone once to avoid infinite growth on repeated DOMContentLoaded
+                if (carouselId === 'destination-carousel' && carouselInner.dataset.cloned !== 'true' && carouselItems.length > 0) {
+                    carouselItems.forEach(item => {
+                        const clone = item.cloneNode(true);
+                        carouselInner.appendChild(clone);
+                    });
+                    carouselInner.dataset.cloned = 'true'; // Mark as cloned
+                }
+            }
+
+            setupInfiniteCarousel('destination-carousel');
+            // The packages carousel remains static, so no infinite loop setup for it.
+
+            // --- Hotel Image Carousel Duplication ---
+            const hotelCarouselWrapper = document.querySelector('.hotel-image-carousel-wrapper');
+            if (hotelCarouselWrapper) {
+                const hotelImages = hotelCarouselWrapper.querySelectorAll('img');
+                if (hotelImages.length > 0) {
+                    if (hotelCarouselWrapper.dataset.cloned !== 'true') {
+                        hotelImages.forEach(img => {
+                            hotelCarouselWrapper.appendChild(img.cloneNode(true));
+                        });
+                        hotelCarouselWrapper.dataset.cloned = 'true'; // Mark as cloned
+                    }
+                }
+            }
+
+            // --- Intersection Observer for Section Slide-in Animations (for Services and Hotel) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Apply staggered animation to children of services grid
+                        if (entry.target.id === 'services-grid') {
+                            Array.from(entry.target.children).forEach((card, index) => {
+                                card.style.animation = 'none'; // Reset animation
+                                void card.offsetWidth; // Trigger reflow
+                                card.style.animation = `slideInFromLeft 0.8s ease-out forwards ${0.1 * index}s`;
+                            });
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const hotelSection = document.getElementById('hotel'); // Observe the hotel section itself for its slide-in
+            const servicesGrid = document.getElementById('services-grid');
+
+            if (hotelSection) {
+                hotelSection.classList.add('animate-slide-in-section'); // Add initial hidden state
+                observer.observe(hotelSection);
+            }
+            if (servicesGrid) {
+                servicesGrid.classList.add('animate-slide-in-section'); // Add initial hidden state
+                observer.observe(servicesGrid);
+            }
+
+            // --- Destination Modal Logic ---
+            const destinationModal = document.getElementById('destinationModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const destinationItems = document.querySelectorAll('#destination-carousel .carousel-item');
+
+            // Function to open the modal
+            function openModal(imageSrc, titleText, descriptionText) {
+                modalImage.src = imageSrc;
+                modalImage.alt = titleText + " Image";
+                modalTitle.textContent = titleText;
+                modalDescription.textContent = descriptionText;
+
+                destinationModal.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            }
+
+            // Function to close the modal
+            function closeModal() {
+                destinationModal.classList.remove('show');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            // Event listeners for each destination card to open modal
+            destinationItems.forEach(item => {
+                item.addEventListener('click', (event) => {
+                    // Only open modal if the click target is NOT the "View Packages" button
+                    if (!event.target.classList.contains('bg-blue-600')) { // Check if it's the button
+                        const title = item.dataset.title;
+                        const description = item.dataset.description;
+                        const image = item.dataset.image;
+                        openModal(image, title, description);
+                    }
+                });
+            });
+
+            // Event listener for close button inside the modal
+            closeModalBtn.addEventListener('click', closeModal);
+
+            // Event listener to close modal when clicking outside the content
+            destinationModal.addEventListener('click', (event) => {
+                if (event.target === destinationModal) {
+                    closeModal();
+                }
+            });
+
+            // Event listener to close modal with Escape key
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && destinationModal.classList.contains('show')) {
+                    closeModal();
+                }
+            });
+
+            // --- Home Discover Modal Logic ---
+            const homeDiscoverModal = document.getElementById('homeDiscoverModal');
+            const closeHomeDiscoverModalBtn = document.getElementById('closeHomeDiscoverModalBtn');
+
+            function openHomeModal() {
+                homeDiscoverModal.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            }
+
+            function closeHomeModal() {
+                homeDiscoverModal.classList.remove('show');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            if (closeHomeDiscoverModalBtn) {
+                closeHomeDiscoverModalBtn.addEventListener('click', closeHomeModal);
+            }
+            homeDiscoverModal.addEventListener('click', (event) => {
+                if (event.target === homeDiscoverModal) {
+                    closeHomeModal();
+                }
+            });
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && homeDiscoverModal.classList.contains('show')) {
+                    closeHomeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
